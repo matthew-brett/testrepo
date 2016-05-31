@@ -1,9 +1,31 @@
 language:
-- objective-c
+- python
+
+matrix:
+  include:
+    - os: linux
+      python: 2.7
+      env: PIP_FLAGS="--pre"
+    - os: linux
+      python: 2.7
+      env: WITH_PYAMG=1 MINIMUM_REQUIREMENTS=1 WITH_QT=1
+    - os: linux
+      python: 3.4
+      env: OPTIONAL_DEPS=1 WITH_PYSIDE=1
+    - os: linux
+      python: 3.5
+      env: PIP_FLAGS="--pre"
+    - os: osx
+      osx_image: xcode7.3
+      language: objective-c
+      env: TRAVIS_PYTHON_VERSION=3.5
+    - os: osx
+      python: 2.7
+    - os: osx
+      python: 3.5
+
 script:
-- if [[ $(sudo which -a virtualenv) =~ sr/local/bin/virtualen ]]; then
-  sudo pip uninstall -y virtualenv;
-  fi
-- if [[ $(sudo which -a pip) =~ sr/local/bin/pi ]]; then
-  sudo pip uninstall -y pip;
-  fi
+- uname -a
+- which python
+- python --version
+- which pip

@@ -24,6 +24,14 @@ matrix:
     - os: osx
       python: 3.5
 
+before_install:
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        git clone https://github.com/MacPython/terryfy.git;
+        source terryfy/travis_tools.sh;
+        get_python_environment macpython $TRAVIS_PYTHON_VERSION venv;
+        source venv/bin/activate;
+      fi
+
 script:
 - uname -a
 - which python

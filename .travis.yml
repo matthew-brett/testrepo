@@ -1,9 +1,9 @@
 language:
 - objective-c
 script:
-- if [ "$(sudo which virtualenv)" == "/usr/local/bin/virtualenv" ]; then
+- if [[ $(sudo which -a virtualenv) =~ sr/local/bin/virtualen ]]; then
   sudo pip uninstall -y virtualenv;
   fi
-- if [ "$(sudo which pip)" == "/usr/local/bin/pip" ]; then
+- if [[ $(sudo which -a pip) =~ sr/local/bin/pi ]]; then
   sudo pip uninstall -y pip;
   fi

@@ -1,4 +1,9 @@
 language:
 - objective-c
 script:
-- sudo which pip
+- if [ "$(sudo which virtualenv)" == "/usr/local/bin/virtualenv" ]; then
+  sudo pip uninstall -y virtualenv;
+  fi
+- if [ "$(sudo which pip)" == "/usr/local/bin/pip" ]; then
+  sudo pip uninstall -y pip;
+  fi

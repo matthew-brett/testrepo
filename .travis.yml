@@ -36,4 +36,6 @@ script:
 - uname -a
 - which python
 - python --version
+- python -c "import distutils.util; print(distutils.util.get_platform())"
+- python -c "import sys; print(sys.maxunicode == 65535)"
 - which pip

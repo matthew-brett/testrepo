@@ -40,5 +40,12 @@ install:
     - install_wheel
 
 script:
-    - ls wheelhouse
-    - python -c 'import tornado; print(tornado.__file__)'
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        ls wheelhouse;
+        python -c 'import tornado; print(tornado.__file__)';
+      else
+        docker pull matthewbrett/trusty:64;
+        docker run --rm -e PYTHON_VERSION="$TRAVIS_PYTHON_VERSION" -v
+        $PWD:/io matthewbrett/trusty:64
+        /io/test_tornado.sh;
+      fi

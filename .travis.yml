@@ -4,6 +4,8 @@ env:
         - BUILD_COMMIT=v4.3.0
         - BUILD_DEPENDS=
         - TEST_DEPENDS=
+        - PLAT=x86_64
+        - UNICODE_WIDTH=32
 
 sudo: required
 dist: trusty
@@ -17,9 +19,30 @@ matrix:
     - os: linux
       python: 2.7
     - os: linux
+      python: 2.7
+      env:
+        - UNICODE_WIDTH=16
+    - os: linux
+      python: 2.7
+      env:
+        - PLAT=i686
+    - os: linux
+      python: 2.7
+      env:
+        - PLAT=i686
+        - UNICODE_WIDTH=16
+    - os: linux
       python: 3.4
     - os: linux
+      python: 3.4
+      env:
+        - PLAT=i686
+    - os: linux
       python: 3.5
+    - os: linux
+      python: 3.5
+      env:
+        - PLAT=i686
     - os: osx
       language: objective-c
       env: TRAVIS_PYTHON_VERSION=2.7
@@ -36,16 +59,7 @@ before_install:
 
 install:
     - git clone https://github.com/facebook/tornado
-    - build_wheels
-    - install_wheel
+    - build_wheel
 
 script:
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        ls wheelhouse;
-        python -c 'import tornado; print(tornado.__file__)';
-      else
-        docker pull matthewbrett/trusty:64;
-        docker run --rm -e PYTHON_VERSION="$TRAVIS_PYTHON_VERSION" -v
-        $PWD:/io matthewbrett/trusty:64
-        /io/test_tornado.sh;
-      fi
+    - install_run test_tornado.sh $PLAT

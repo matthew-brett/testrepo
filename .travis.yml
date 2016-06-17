@@ -58,8 +58,10 @@ before_install:
     - before_install
 
 install:
+    # Maybe get and clean and patch source
     - git clone https://github.com/facebook/tornado
-    - build_wheel
+    - (cd $REPO_DIR && git checkout $BUILD_COMMIT)
+    - build_wheel $REPO_DIR $PLAT
 
 script:
-    - install_run test_tornado.sh $PLAT
+    - install_run $PLAT

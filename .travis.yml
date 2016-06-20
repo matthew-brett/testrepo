@@ -6,27 +6,18 @@ env:
         - TEST_DEPENDS=
         - PLAT=x86_64
         - UNICODE_WIDTH=32
+        - secure: "U/VcT3mxKFIbRg6dGd8fvptwplLeY5bLaq1ycxT6G0bFc54rkHA7q9dVLfGKqMl3pgzPu+lhHqKl1jtKEt82omOgnzHpY3b8Ee+NAh3VI8zh9U9dXYw4wKucNQXw0sGOwANoQ9i640qsO0LL/s7IVetcrUPl3/euM5gbq0QhGNqVcovHuuSiqEZqjjOwoIuajwNA6TjVsf36qwrcfXF8flGvFc2DzrQh0kDIWd8ESCnIXQjKUK3NLERL6oVCrho8b3roSivIRaDP2ACgcbLOjNXqepqYWi/NsyyZXcRMZ1bMiOphEnk1/XHGRF+rkLcgCrIFKWLNhDWdtjJkQfgITb7xlIKfkMr6AaqOsDkTc208fFXdGABdmFIGhTJvuYU/KNznJP+dTm+vqS04hoblQnIwIuTf52kirXkdyllrwe95c+DKVaFLWOg9of+jvAPGYdn8YLwggIc1HosGVM5veW2qErILqMhHp+YS74T24Z40ImFPgN7dMuQ/gIjBHk3rKUw4fYlD8eK2BsgrJoAJaJiz7vxz3b4OQSACGYoqVCNQnH4pWR1lFRbgoc74NzfmAMJzXoMwkPQY+5SbGQz/tM7bGr98KzEq34pTRjCErZYZy3Kyyltk1v3SCKgTNw0lIxWnxUOgAWVjXXtxXjuyyR2f0dmQygJDBZVMFY88tmo="
 
-sudo: required
 dist: trusty
-services:
-  - docker
 language:
   - python
 
 matrix:
   include:
+    - os: linux
+      python: 2.7
     - os: osx
       language: objective-c
-      env: TRAVIS_PYTHON_VERSION=3.5
-
-before_install:
-    - source multibuild/travis_steps.sh
-    - before_install
-
-install:
-    # Maybe get and clean and patch source
-    - pip install -f https://nipy.bic.berkeley.edu/manylinux numpy==1.8.2
 
 script:
-    - python -c 'from numpy.distutils.core import setup'
+    - ruby parse_travis.rb

@@ -16,39 +16,6 @@ language:
 
 matrix:
   include:
-    - os: linux
-      python: 2.7
-    - os: linux
-      python: 2.7
-      env:
-        - UNICODE_WIDTH=16
-    - os: linux
-      python: 2.7
-      env:
-        - PLAT=i686
-    - os: linux
-      python: 2.7
-      env:
-        - PLAT=i686
-        - UNICODE_WIDTH=16
-    - os: linux
-      python: 3.4
-    - os: linux
-      python: 3.4
-      env:
-        - PLAT=i686
-    - os: linux
-      python: 3.5
-    - os: linux
-      python: 3.5
-      env:
-        - PLAT=i686
-    - os: osx
-      language: objective-c
-      env: TRAVIS_PYTHON_VERSION=2.7
-    - os: osx
-      language: objective-c
-      env: TRAVIS_PYTHON_VERSION=3.4
     - os: osx
       language: objective-c
       env: TRAVIS_PYTHON_VERSION=3.5
@@ -59,9 +26,7 @@ before_install:
 
 install:
     # Maybe get and clean and patch source
-    - git clone https://github.com/facebook/tornado
-    - (cd $REPO_DIR && git checkout $BUILD_COMMIT)
-    - build_wheel $REPO_DIR $PLAT
+    - pip install -f https://nipy.bic.berkeley.edu/manylinux numpy==1.8.2
 
 script:
-    - install_run $PLAT
+    - python -c 'from numpy.distutils.core import setup'

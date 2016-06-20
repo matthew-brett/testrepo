@@ -20,4 +20,5 @@ matrix:
       language: objective-c
 
 script:
+    - gem install travis-yaml
     - ruby parse_travis.rb

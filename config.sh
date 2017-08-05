@@ -5,7 +5,8 @@
 function pre_build {
     # Any stuff that you need to do before you start building the wheels
     # Runs in the root directory of this repository.
-    :
+    (echo foo)
+    (echo bar)
 }
 
 # If `pre_build` doesn't give you enough customization, you can redefine the
@@ -15,5 +16,4 @@ function pre_build {
 function run_tests {
     # Runs tests on installed distribution from an empty directory
     python --version
-    python -m tornado.test.runtests
 }

@@ -5,8 +5,14 @@
 function pre_build {
     # Any stuff that you need to do before you start building the wheels
     # Runs in the root directory of this repository.
+    echo Starting here
     (echo foo)
     (echo bar)
+    echo Ending here
+}
+
+function pip_wheel_cmd {
+    echo "In fake pip command"
 }
 
 # If `pre_build` doesn't give you enough customization, you can redefine the
